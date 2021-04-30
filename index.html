@@ -1,0 +1,275 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" href="style.css" >
+</head>
+<body>
+	<center>
+
+<table>
+        <tr>
+            <td>
+
+               <form >
+                    <div>
+                        <label  for="name">First Name</label>
+
+                         <input type="text" name="fullName" id="fullName" class="text-box" required name="name"> 
+                        <!-- <input type="text" id="fullName" name="fullName" class="text-box" placeholder="Name" required="" name="name"> -->
+                    </div>
+                
+                    <div>
+                        <label  for="secondname"> Second Name</label>
+                        <input type="text" name="secondName" id="secondName" class="text-box" required>
+                        
+                    </div>
+                    <div>
+                        <label  for="email">Email</label>
+                        <input type="text" name="email" id="email" class="text-box" required>
+                    </div>
+                    <div>
+                        <label  for="age">age</label> 
+                        <input type="text" name="age" id="age" class="text-box" required>
+                    </div>
+                    <div>
+                        <label  for="number">Mobile number</label>
+                        <input type="text" name="phone" id="phone" class="text-box" required>
+                    </div>
+                    <div  class="form-action-buttons">
+
+                    <input type="submit" class="submit-button" id="submit"  value="create" onclick="event.preventDefault();Submit();">
+                    </div>
+                </form>
+            </td>
+        </table>	
+        
+     <!------------------------------------------------------------------------------------------------>	
+            <td>
+                <table id="details" class="list">
+                    <thead>
+                        <tr>
+                            <th>first name</th>
+                            <th>Second name</th>
+                            <th>Email</th>
+                            <th>Age</th>
+                             <th>Mobile Number</th>
+                        
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+        
+    </table>
+    </center>
+</body>
+
+<script type="text/javascript">
+	
+	
+var selectedRow = null
+
+function Submit() {
+    if (validate()) {
+        var formData = readFormData();
+        if (selectedRow == null)
+            insertNewRecord(formData);
+        else
+            updateRecord(formData);
+        resetForm();
+    }
+}
+
+// function onclickHandler() {
+//     var form = document.querySelector("#myForm"),
+//         fields = form.querySelectorAll(".requiredField"),
+//         error = form.querySelector(".error");
+
+//     for (var i = 0; i < fields.length; i++) {
+//         var field = fields[i];
+//         if (field.value == "") {
+//             error.innerHTML = '<p>Fill this field</p>';
+//         } else {
+//             console.log('ok');
+//             error.remove();
+//         }    
+//     }
+// }
+
+function validate() {
+
+    isValid = true;
+   
+    var name = document.getElementById("fullName").value;  
+    var name = document.getElementById("secondName").value;  
+    var email = document.getElementById("email").value;  
+    var age = document.getElementById("age").value;  
+    var phone = document.getElementById("phone").value;
+
+	  if (fullName == "") {
+	  alert (" fields required");
+	    return false;
+	  }
+      if (secondName == "") {
+	  alert  ("secondname fields required");
+	    return false;
+	  }
+	  if (email == "") {
+	  alert  ("email fields required");
+	    return false;
+	  }
+      if (age == "") {
+	  alert  ("age fields required");
+	    return false;
+	  }	
+	  if (phone == "") {
+	 alert   ("phone fields required");s   
+	    return false;
+	  }
+     
+    return isValid;
+    
+    }	
+  
+const formdata=[]
+// formdata.push()
+// formdata.push({
+//   name:"venk",
+//   age:12
+  
+// })
+
+formdata.push({
+    fullName:"nivy",
+    secondName:"venky",
+    email:"vnivi@gmail.com",
+    age:5
+
+})
+//  console.log(formdata)
+ const formdata1=formdata.map(data => console.log(data.fullName,data.secondName));
+
+
+//  console.log(formdata1);
+//  const formdata1=formdata.map(data => {
+//   <li>data.FullName</li>
+// })
+
+//  const formdata=[]
+//  formdata.map({
+//     fullName:"nivy",
+//     secondName:"venky",
+//     email:"vnivi@gmail.com",
+//     age:5  
+//  })
+//  const formdata1 = formdata.map(data => formdata.fullName);
+//  console.log(formdata1)
+
+
+// const arr1=arr.map(data => {
+//   <th>formdata.fullname</th>
+//   <th>data.secondName</th>
+//   <th>data.email</th>
+// console.log(formdata1)
+// })
+
+function readFormData() {
+    var formData = {};
+    formData["fullName"] = document.getElementById("fullName").value;
+    formData["secondName"] = document.getElementById("secondName").value;
+    formData["email"] = document.getElementById("email").value;
+    formData["age"] = document.getElementById("age").value;
+    formData["phone"] = document.getElementById("phone").value;
+    console.log(formData,'nivy')
+    return formData;
+}
+
+
+
+function insertNewRecord(data) {
+    var table = document.getElementById("details").getElementsByTagName('tbody')[0];
+    var newRow = table.insertRow(table.length);
+    cell1 = newRow.insertCell(0);
+    cell1.innerHTML = data.fullName;
+    cell1 = newRow.insertCell(1);
+    cell1.innerHTML = data.secondName;
+    cell2 = newRow.insertCell(2);
+    cell2.innerHTML = data.email;
+    cell3 = newRow.insertCell(3);
+    cell3.innerHTML = data.age;
+    cell4 = newRow.insertCell(4);
+    cell4.innerHTML = data.phone;
+    cell4 = newRow.insertCell(5);
+cell4.innerHTML = `<a class="Edit-button" onClick="onEdit(this)">Edit</a>
+                       <a class="Delete-button"  onClick="onDelete(this)">Delete</a>`;  
+}
+
+function resetForm() {
+    document.getElementById("fullName").value = "";
+    document.getElementById("secondName").value = "";
+    document.getElementById("email").value = "";
+    document.getElementById("age").value = "";
+    document.getElementById("phone").value = "";
+    selectedRow = null;
+}
+
+
+
+function onEdit(td) {
+
+    selectedRow = td.parentElement.parentElement;
+    const button = document.getElementById('submit');
+    if(selectedRow.rowIndex){
+    	button.value = 'Update'
+    }
+    document.getElementById("fullName").value = selectedRow.cells[0].innerHTML;
+    document.getElementById("secondName").value = selectedRow.cells[1].innerHTML;
+    document.getElementById("email").value = selectedRow.cells[2].innerHTML;
+    document.getElementById("age").value = selectedRow.cells[3].innerHTML;
+    document.getElementById("phone").value = selectedRow.cells[4].innerHTML;
+
+
+}
+function onDelete(td) {
+    if (confirm('Are you sure to delete this record ?')) {
+         row = td.parentElement.parentElement;
+        document.getElementById("details").deleteRow(row.rowIndex);
+        resetForm();
+    }
+}
+function onEdit(td) {
+
+    selectedRow = td.parentElement.parentElement;
+    const button = document.getElementById('submit');
+    if(selectedRow.rowIndex){
+    	button.value = 'Update'
+    }
+    document.getElementById("fullName").value = selectedRow.cells[0].innerHTML;
+    document.getElementById("secondName").value = selectedRow.cells[1].innerHTML;
+    document.getElementById("email").value = selectedRow.cells[2].innerHTML;
+    document.getElementById("age").value = selectedRow.cells[3].innerHTML;
+    document.getElementById("phone").value = selectedRow.cells[4].innerHTML;
+
+
+}
+function updateRecord(formData) {
+	const button = document.getElementById('submit');
+    if(selectedRow.rowIndex){
+    	button.value = 'Submit'
+    }
+    selectedRow.cells[0].innerHTML = formData.fullName;
+    selectedRow.cells[1].innerHTML = formData.secondName;
+    selectedRow.cells[2].innerHTML = formData.email;
+    selectedRow.cells[3].innerHTML = formData.age;
+    selectedRow.cells[4].innerHTML = formData.phone;
+
+}
+
+
+</script>
+</html>
